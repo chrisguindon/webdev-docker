@@ -1,0 +1,47 @@
+###
+# Copyright (c) 2017 Eclipse Foundation and others. # 
+# This program and the accompanying materials are made available 
+#
+# under the terms of the Eclipse Public License 2.0 which accompanies 
+# this distribution, and is available at http://eclipse.org/legal/epl-2.0
+###
+
+version: '3'
+services:
+  php5.3:
+    image: chrisguindon/webdev:php5.3
+    ports:
+       - 80
+  php5.5:
+    image: chrisguindon/webdev:php5.5
+    ports:
+       - 80
+  php5.6:
+    image: chrisguindon/webdev:php5.6
+    ports:
+       - 80
+  blackfire:
+    image: blackfire/blackfire
+    environment:
+        - BLACKFIRE_SERVER_ID
+        - BLACKFIRE_SERVER_TOKEN
+# Using password example from https://hub.docker.com/_/mariadb/.
+# You should consider using something different.
+  mariadb:
+    image: mariadb:latest
+    ports:
+      - 3306
+    environment:
+        MYSQL_ROOT_PASSWORD: my-secret-pw
+        MYSQL_PASSWORD: my-secret-pw 
+        MYSQL_USER: admin
+        MYSQL_DATABASE: eclipse
+  planet-eclipse:
+    image: chrisguindon/webdev:planeteclipse
+    ports:
+      - 80
+#    volumes: 
+#      - ~/localsite/planeteclipse.org:/gitroot/planeteclipse.org 
+    environment:
+      PLANETECLIPSE_HTTP_SERVER: "true"
+      PLANETECLIPSE_UPDATE: "true"
