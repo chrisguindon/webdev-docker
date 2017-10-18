@@ -11,7 +11,7 @@ You can test your eclipse project website with three different php version.
 * [php5.5](https://github.com/chrisguindon/webdev-docker/blob/master/php/php5.5/Dockerfile)
 * [php5.5](https://github.com/chrisguindon/webdev-docker/blob/master/php/php5.5/Dockerfile)
 
-These images can be pulled from chrisguindon/webdev:<VERSION>
+These images can be pulled from `chrisguindon/webdev:<VERSION>`
 
 ```console
 docker pull chrisguindon/webdev:php56
