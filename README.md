@@ -2,6 +2,26 @@
 
 These images are maintained by the Eclipse Foundation webdev team. They are designed to be used in development only.
 
+## php
+You can test your eclipse project website with three different php version.
+
+### Supported tags and respective `Dockerfile` links
+
+* [php5.3](https://github.com/chrisguindon/webdev-docker/blob/master/php/php5.3/Dockerfile)
+* [php5.5](https://github.com/chrisguindon/webdev-docker/blob/master/php/php5.5/Dockerfile)
+* [php5.5](https://github.com/chrisguindon/webdev-docker/blob/master/php/php5.5/Dockerfile)
+
+### Example
+
+```console
+mkdir eclipse.local && cd eclipse.local
+git clone https://git.eclipse.org/r/www.eclipse.org/eclipse.org-common
+git clone https://git.eclipse.org/r/www.eclipse.org/users
+docker run -p 80:80 --name eclipse-webdev-php56 -v "$PWD":/localsite/eclipse.local -d  chrisguindon/webdev:php5.6
+```
+
+
+
 The php images are inspired by the Docker [official image](https://docs.docker.com/docker-hub/official_repos/) for [php](https://registry.hub.docker.com/_/php/).
 
 ## planeteclipse

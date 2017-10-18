@@ -66,17 +66,17 @@ RUN pecl install apcu-4.0.11 \
 # Clean-up installation.
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y autoclean && apt-get -y autoremove
 
-# Setup web root
-RUN mkdir -p /localsite/eclipse.local
-COPY index.php /localsite/eclipse.local/
-RUN chown -R www-data:www-data /localsite
-VOLUME /localsite
-
 # Setup home-data web root
-RUN mkdir -p /home/data/
+WORKDIR /home
 RUN git clone --recursive git://github.com/chrisguindon/eclipsefdn-home-data.git data
 RUN chown -R www-data:www-data /home/data/
 VOLUME /home
+
+# Setup web root
+WORKDIR /localsite/eclipse.local
+COPY index.php /localsite/eclipse.local/
+RUN chown -R www-data:www-data /localsite
+VOLUME /localsite
 
 # Copy php.ini file for developement
 COPY php.ini /etc/php5/apache2/
