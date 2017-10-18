@@ -14,7 +14,7 @@ You can test your eclipse project website with three different php version.
 These images can be pulled from `chrisguindon/webdev:<VERSION>`
 
 ```console
-docker pull chrisguindon/webdev:php56
+docker pull chrisguindon/webdev:php5.6
 ```
 
 ### Example
