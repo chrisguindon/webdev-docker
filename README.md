@@ -3,7 +3,7 @@
 These images are maintained by the Eclipse Foundation webdev team. They are designed to be used in development only.
 
 ## php
-You can test your eclipse project website with three different php version.
+You can test your Eclipse project website with 3 different php versions.
 
 ### Supported tags and respective `Dockerfile` links
 
