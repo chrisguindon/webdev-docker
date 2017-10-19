@@ -24,7 +24,6 @@ RUN apt-get update && \
         libfreetype6-dev \
         libssl-dev \
         libmcrypt-dev \
-        openssh-client \
         apache2 \
         php5 \
         php5-cli \

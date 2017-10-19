@@ -23,7 +23,7 @@ RUN set -ex \
         libz-dev \
         libmemcached-dev \
     ' \ 
-    && apt-get update && apt-get install -y --no-install-recommends $buildDeps curl git openssh-client \
+    && apt-get update && apt-get install -y --no-install-recommends $buildDeps curl git \
     && rm -rf /var/lib/apt/lists/* \
     && docker-php-ext-configure gd \
         --with-jpeg-dir=/usr \
