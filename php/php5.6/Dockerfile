@@ -10,12 +10,6 @@
 FROM php:5.6-apache
 MAINTAINER Christopher Guindon <chris.guindon@eclipse-foundation.org>
 
-# Add default VirtualHost file
-ADD ./sites-available /etc/apache2/sites-available/
-
-# Copy php.ini file for development
-COPY php.ini /usr/local/etc/php/
-
 # Setup home-data root
 WORKDIR /home
 
@@ -29,7 +23,7 @@ RUN set -ex \
         libz-dev \
         libmemcached-dev \
     ' \ 
-    && apt-get update && apt-get install -y --no-install-recommends $buildDeps curl git \
+    && apt-get update && apt-get install -y --no-install-recommends $buildDeps curl git openssh-client \
     && rm -rf /var/lib/apt/lists/* \
     && docker-php-ext-configure gd \
         --with-jpeg-dir=/usr \
@@ -60,6 +54,12 @@ RUN set -ex \
     && a2enmod alias authz_host deflate dir expires headers mime php5 rewrite setenvif \
     && git clone --recursive git://github.com/chrisguindon/eclipsefdn-home-data.git data  \
     && chown -R www-data:www-data /home/data/
+
+# Add default VirtualHost file
+ADD ./sites-available /etc/apache2/sites-available/
+
+# Copy webdev php.ini file for development
+COPY php.ini /usr/local/etc/php/
 
 # Setup web root
 WORKDIR /localsite/eclipse.local
