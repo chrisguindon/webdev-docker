@@ -64,9 +64,9 @@ COPY php.ini /etc/php5/apache2/
 ADD ./sites-available /etc/apache2/sites-available/
 
 # Setup web root
-WORKDIR /localsite/eclipse.local
-COPY index.php /localsite/eclipse.local/
-RUN chown -R www-data:www-data /localsite \
+WORKDIR /var/www/html
+COPY index.php /var/www/html
+RUN chown -R www-data:www-data /var/www/html \
     && /etc/init.d/apache2 restart
 
 COPY docker-php-entrypoint /usr/local/bin/

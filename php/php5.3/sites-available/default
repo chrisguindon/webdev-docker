@@ -1,13 +1,18 @@
 <VirtualHost *:80>
   ServerAdmin chris.guindon@eclipse-foundation.org
-  DocumentRoot /localsite/eclipse.local
+  DocumentRoot /var/www/html
   
   <Directory />
     Options FollowSymLinks
     AllowOverride None
   </Directory>
   
-  <Directory /localsite/eclipse.local/>
+  <Directory /var/www/html/>
+    RewriteEngine On
+    RewriteOptions inherit
+  </Directory>
+  
+  <Directory /localsite/>
     RewriteEngine On
     RewriteOptions inherit
   </Directory>

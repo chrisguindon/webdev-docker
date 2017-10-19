@@ -40,8 +40,6 @@ services:
     image: chrisguindon/webdev:planeteclipse
     ports:
       - 80
-#    volumes: 
-#      - ~/localsite/planeteclipse.org:/gitroot/planeteclipse.org 
     environment:
       PLANETECLIPSE_HTTP_SERVER: "true"
       PLANETECLIPSE_UPDATE: "true"

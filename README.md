@@ -24,7 +24,7 @@ mkdir eclipse.local && cd eclipse.local
 git clone https://git.eclipse.org/r/www.eclipse.org/eclipse.org-common
 git clone https://git.eclipse.org/r/www.eclipse.org/users
 git clone https://git.eclipse.org/r/www.eclipse.org/downloads
-docker run -p 80:80 --name eclipse-webdev-php56 -v "$PWD":/localsite/eclipse.local -d  chrisguindon/webdev:php5.6
+docker run -p 80:80 --name eclipse-webdev-php56 -v "$PWD":/var/www/html -d  chrisguindon/webdev:php5.6
 ```
 
 The php images are inspired by the Docker [official image](https://docs.docker.com/docker-hub/official_repos/) for [php](https://registry.hub.docker.com/_/php/).

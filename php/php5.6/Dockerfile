@@ -62,7 +62,7 @@ ADD ./sites-available /etc/apache2/sites-available/
 COPY php.ini /usr/local/etc/php/
 
 # Setup web root
-WORKDIR /localsite/eclipse.local
-COPY index.php /localsite/eclipse.local/ 
-RUN chown -R www-data:www-data /localsite \
+WORKDIR /var/www/html
+COPY index.php /var/www/html
+RUN chown -R www-data:www-data /var/www/html \
     && /etc/init.d/apache2 restart
