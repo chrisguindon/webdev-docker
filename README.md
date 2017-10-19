@@ -23,6 +23,7 @@ docker pull chrisguindon/webdev:php5.6
 mkdir eclipse.local && cd eclipse.local
 git clone https://git.eclipse.org/r/www.eclipse.org/eclipse.org-common
 git clone https://git.eclipse.org/r/www.eclipse.org/users
+git clone https://git.eclipse.org/r/www.eclipse.org/downloads
 docker run -p 80:80 --name eclipse-webdev-php56 -v "$PWD":/localsite/eclipse.local -d  chrisguindon/webdev:php5.6
 ```
 
