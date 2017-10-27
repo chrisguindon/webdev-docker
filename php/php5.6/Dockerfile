@@ -55,14 +55,7 @@ RUN set -ex \
     && git clone --recursive git://github.com/chrisguindon/eclipsefdn-home-data.git data  \
     && chown -R www-data:www-data /home/data/
 
-# Add default VirtualHost file
-ADD ./sites-available /etc/apache2/sites-available/
-
-# Copy webdev php.ini file for development
-COPY php.ini /usr/local/etc/php/
-
 # Setup web root
 WORKDIR /var/www/html
 COPY index.php /var/www/html
-RUN chown -R www-data:www-data /var/www/html \
-    && /etc/init.d/apache2 restart
+RUN chown -R www-data:www-data /var/www/html

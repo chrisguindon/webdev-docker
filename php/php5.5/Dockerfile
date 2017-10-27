@@ -13,6 +13,7 @@ MAINTAINER Christopher Guindon <chris.guindon@eclipse.org>
 # Setup home-data web root
 WORKDIR /home
 
+# Install dependencies
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
         curl \
@@ -58,18 +59,11 @@ RUN apt-get update && \
     && a2enmod alias authz_host deflate dir expires headers mime php5 rewrite ssl setenvif \
     && chown -R www-data:www-data /home/data/
 
-# Copy webdev php.ini file for development
-COPY php.ini /etc/php5/apache2/
-
-# Add vhosts and restart apache
-ADD ./sites-available /etc/apache2/sites-available/
-
 # Setup web root
 WORKDIR /var/www/html
 COPY index.php /var/www/html
 RUN rm index.html \
-    && chown -R www-data:www-data /var/www/html \
-    && /etc/init.d/apache2 restart
+    && chown -R www-data:www-data /var/www/html
 
 COPY docker-php-entrypoint /usr/local/bin/
 COPY apache2-foreground /usr/local/bin/

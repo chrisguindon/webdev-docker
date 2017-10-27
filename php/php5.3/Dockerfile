@@ -57,17 +57,15 @@ RUN apt-get update && \
     && a2enmod alias authz_host deflate dir expires headers mime php5 rewrite ssl setenvif \
     && chown -R www-data:www-data /home/data/
 
-# Copy webdev php.ini file for development
-COPY php.ini /etc/php5/apache2/
-
-# Add vhosts and restart apache
-ADD ./sites-available /etc/apache2/sites-available/
-
 # Setup web root
 WORKDIR /var/www/html
+
+# Update document root to match php5.5 and php5.6
+RUN sed -ri -e 's!/var/www!/var/www/html!g' /etc/apache2/sites-available/default*
+
 COPY index.php /var/www/html
 RUN chown -R www-data:www-data /var/www/html \
-    && /etc/init.d/apache2 restart
+    && /etc/init.d/apache2 reload
 
 COPY docker-php-entrypoint /usr/local/bin/
 COPY apache2-foreground /usr/local/bin/

@@ -9,7 +9,3 @@ This product includes third party content which originates from Docker-Library h
 
 * https://github.com/docker-library/php/blob/master/docker-php-entrypoint
 * https://github.com/docker-library/php/blob/master/5.6/jessie/apache/apache2-foreground
-
-This product includes a configuration file from the PHP Library https://github.com/php/php-src/ subject to the PHP 3.0.1 License (https://github.com/php/php-src/blob/master/LICENSE)
-
-* https://github.com/php/php-src/blob/master/php.ini-development
