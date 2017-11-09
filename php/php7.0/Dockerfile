@@ -7,7 +7,7 @@
 # at http://eclipse.org/legal/epl-2.0
 ###
 
-FROM php:5.6-apache
+FROM php:7.0.25-apache
 MAINTAINER Christopher Guindon <chris.guindon@eclipse-foundation.org>
 
 # Setup home-data root
@@ -28,19 +28,27 @@ RUN set -ex \
     && docker-php-ext-configure gd \
         --with-jpeg-dir=/usr \
         --with-png-dir=/usr \
-    && docker-php-ext-install -j "$(nproc)" bcmath gd mbstring pdo pdo_mysql pdo_pgsql mysql zip mcrypt \
+    && docker-php-ext-install -j "$(nproc)" bcmath gd mbstring pdo pdo_mysql pdo_pgsql mysqli zip mcrypt \
     && docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/ \
         && docker-php-ext-install ldap \
-    && pecl install oauth-1.2.3 \
+    && pecl install oauth-2.0.2 \
         && echo "extension=oauth.so" >> $PHP_INI_DIR/conf.d/oauth.ini \
+    && git clone https://github.com/php/pecl-php-uploadprogress.git /tmp/php-uploadprogress \
+        && cd /tmp/php-uploadprogress \
+        && phpize \
+        && ./configure --prefix=/usr \
+        && make \
+        && make install \
+        && echo 'extension=uploadprogress.so' > $PHP_INI_DIR/conf.d/uploadprogress.ini \
+        && rm -rf /tmp/* \
+        && cd /home \
     && pecl install -o -f redis \
         && rm -rf /tmp/pear \
         && docker-php-ext-enable redis  \
-    && pecl install memcached-2.2.0 \
+    && docker-php-ext-enable mcrypt \
+    && pecl install memcached-3.0.3 \
         && docker-php-ext-enable memcached \
-    && pecl install uploadprogress \
-        && echo "extension=uploadprogress.so" >> $PHP_INI_DIR/conf.d/uploadprogress.ini \
-    && pecl install apcu-4.0.11 \
+    && pecl install apcu-5.1.8 \
         && echo extension=apcu.so > $PHP_INI_DIR/conf.d/apcu.ini \
     && version=$(php -r "echo PHP_MAJOR_VERSION.PHP_MINOR_VERSION;") \
         && curl -A "Docker" -o /tmp/blackfire-probe.tar.gz -D - -L -s https://blackfire.io/api/v1/releases/probe/php/linux/amd64/$version \
@@ -51,10 +59,10 @@ RUN set -ex \
         libjpeg62-turbo \
         libpq5 \
     && apt-get purge -y --auto-remove $buildDeps \
-    && a2enmod alias authz_host deflate dir expires headers mime php5 rewrite setenvif \
-    && git clone --recursive git://github.com/chrisguindon/eclipsefdn-home-data.git data  \
+    && a2enmod alias authz_host deflate dir expires headers mime php7 rewrite setenvif \
+    && git clone --recursive git://github.com/chrisguindon/eclipsefdn-home-data.git /home/data  \
     && chown -R www-data:www-data /home/data/
-
+    
 # Setup web root
 WORKDIR /var/www/html
 COPY index.php /var/www/html

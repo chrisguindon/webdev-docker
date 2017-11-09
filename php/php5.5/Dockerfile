@@ -43,6 +43,7 @@ RUN apt-get update && \
         ca-certificates \
         git \
         php5-mcrypt \
+    && php5enmod mcrypt \
     && pecl install oauth-1.2.3 \
         && echo "extension=oauth.so" >> /etc/php5/apache2/conf.d/oauth.ini \
     &&  version=$(php -r "echo PHP_MAJOR_VERSION.PHP_MINOR_VERSION;") \

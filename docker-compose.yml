@@ -20,6 +20,10 @@ services:
     build: ./php/php5.6
     ports:
        - 80
+  php7.0:
+    build: ./php/php7.0
+    ports:
+       - 80
   planeteclipse:
     build: ./planeteclipse
     ports:

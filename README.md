@@ -3,13 +3,14 @@
 These images are maintained by the Eclipse Foundation webdev team. They are designed to be used in development only.
 
 ## php
-You can test your Eclipse project website with 3 different php versions.
+You can test your Eclipse project website with *4* php versions.
 
 ### Supported tags and respective `Dockerfile` links
 
 * [php5.3](https://github.com/chrisguindon/webdev-docker/blob/master/php/php5.3/Dockerfile)
 * [php5.5](https://github.com/chrisguindon/webdev-docker/blob/master/php/php5.5/Dockerfile)
 * [php5.6](https://github.com/chrisguindon/webdev-docker/blob/master/php/php5.6/Dockerfile)
+* [php7.0](https://github.com/chrisguindon/webdev-docker/blob/master/php/php7.0/Dockerfile)
 
 These images can be pulled from `chrisguindon/webdev:<VERSION>`
 

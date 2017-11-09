@@ -20,6 +20,10 @@ services:
     image: chrisguindon/webdev:php5.6
     ports:
        - 80
+  php7.0:
+    image: chrisguindon/webdev:php7.0
+    ports:
+       - 80
   blackfire:
     image: blackfire/blackfire
     environment:
