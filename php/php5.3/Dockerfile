@@ -41,8 +41,11 @@ RUN apt-get update && \
         php5-curl \
         git \
         php5-mcrypt \
+        php5-xdebug \
     && pecl install oauth-1.2.3 \
         && echo "extension=oauth.so" >> /etc/php5/apache2/conf.d/oauth.ini \
+    && pecl install xdebug-2.2.7 \
+        && echo "extension=xdebug.so" >> /etc/php5/apache2/conf.d/xdebug.ini \
     && version=$(php -r "echo PHP_MAJOR_VERSION.PHP_MINOR_VERSION;") \
         && curl -A "Docker" -o /tmp/blackfire-probe.tar.gz -D - -L -s https://blackfire.io/api/v1/releases/probe/php/linux/amd64/$version \
         && tar zxpf /tmp/blackfire-probe.tar.gz -C /tmp \
@@ -57,6 +60,13 @@ RUN apt-get update && \
     && a2enmod alias authz_host deflate dir expires headers mime php5 rewrite ssl setenvif \
     && chown -R www-data:www-data /home/data/
 
+RUN  echo "xdebug.remote_enable=on" >> /etc/php5/apache2/conf.d/xdebug.ini \
+        && echo "xdebug.remote_autostart=on" >> /etc/php5/apache2/conf.d/xdebug.ini \
+        && echo "xdebug.remote_host=10.254.254.254" >> /etc/php5/apache2/conf.d/xdebug.ini \
+        && echo "xdebug.remote_enable=on" >> /etc/php5/cli/conf.d/xdebug.ini \
+        && echo "xdebug.remote_autostart=on" >> /etc/php5/cli/conf.d/xdebug.ini \
+        && echo "xdebug.remote_host=10.254.254.254" >> /etc/php5/cli/conf.d/xdebug.ini
+        
 # Setup web root
 WORKDIR /var/www/html
 

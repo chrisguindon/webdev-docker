@@ -33,6 +33,8 @@ RUN set -ex \
         && docker-php-ext-install ldap \
     && pecl install oauth-1.2.3 \
         && echo "extension=oauth.so" >> $PHP_INI_DIR/conf.d/oauth.ini \
+    && pecl install xdebug \
+        && echo "extension=xdebug.so" >> $PHP_INI_DIR/conf.d/xdebug.ini \
     && pecl install -o -f redis \
         && rm -rf /tmp/pear \
         && docker-php-ext-enable redis  \

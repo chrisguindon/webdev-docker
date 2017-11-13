@@ -33,6 +33,8 @@ RUN set -ex \
         && docker-php-ext-install ldap \
     && pecl install oauth-2.0.2 \
         && echo "extension=oauth.so" >> $PHP_INI_DIR/conf.d/oauth.ini \
+    && pecl install xdebug \
+        && echo "extension=xdebug.so" >> $PHP_INI_DIR/conf.d/xdebug.ini \
     && git clone https://github.com/php/pecl-php-uploadprogress.git /tmp/php-uploadprogress \
         && cd /tmp/php-uploadprogress \
         && phpize \

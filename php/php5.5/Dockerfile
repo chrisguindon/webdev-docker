@@ -46,6 +46,8 @@ RUN apt-get update && \
     && php5enmod mcrypt \
     && pecl install oauth-1.2.3 \
         && echo "extension=oauth.so" >> /etc/php5/apache2/conf.d/oauth.ini \
+    && pecl install xdebug \
+        && echo "extension=xdebug.so" >> /etc/php5/apache2/conf.d/xdebug.ini \
     &&  version=$(php -r "echo PHP_MAJOR_VERSION.PHP_MINOR_VERSION;") \
         && curl -A "Docker" -o /tmp/blackfire-probe.tar.gz -D - -L -s https://blackfire.io/api/v1/releases/probe/php/linux/amd64/$version \
         && tar zxpf /tmp/blackfire-probe.tar.gz -C /tmp \
