@@ -60,13 +60,6 @@ RUN apt-get update && \
     && a2enmod alias authz_host deflate dir expires headers mime php5 rewrite ssl setenvif \
     && chown -R www-data:www-data /home/data/
 
-RUN  echo "xdebug.remote_enable=on" >> /etc/php5/apache2/conf.d/xdebug.ini \
-        && echo "xdebug.remote_autostart=on" >> /etc/php5/apache2/conf.d/xdebug.ini \
-        && echo "xdebug.remote_host=10.254.254.254" >> /etc/php5/apache2/conf.d/xdebug.ini \
-        && echo "xdebug.remote_enable=on" >> /etc/php5/cli/conf.d/xdebug.ini \
-        && echo "xdebug.remote_autostart=on" >> /etc/php5/cli/conf.d/xdebug.ini \
-        && echo "xdebug.remote_host=10.254.254.254" >> /etc/php5/cli/conf.d/xdebug.ini
-        
 # Setup web root
 WORKDIR /var/www/html
 
